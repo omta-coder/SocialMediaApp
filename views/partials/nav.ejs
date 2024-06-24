@@ -1,0 +1,23 @@
+<nav class="flex justify-between py-10 w-[80%] mx-auto">
+  <div class="text-2xl font-bold">Logo</div>
+  <div class="flex gap-x-10">
+    <% if(user) { %>
+    <a class="text-lg" href="/user/profile">Home</a>
+    <% }else { %>
+    <a class="text-lg" href="/">Home</a>
+
+    <% } %>
+    <a class="text-lg" href="/about">About</a>
+    <a class="text-lg" href="/contact">Contact</a>
+  </div>
+
+  <div>
+    <% if(user) { %>
+    <a class="text-lg bg-red-500 text-white px-5 py-2 rounded" href="/user/logout">Logout</a>
+
+    <% }else { %>
+    <a class="text-lg text-white bg-blue-500 hover:bg-blue-600 duration-300 px-5 py-2 rounded" href="/login">Login</a>
+
+    <% } %>
+  </div>
+</nav>

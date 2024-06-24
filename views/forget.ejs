@@ -1,0 +1,21 @@
+<%- include("partials/header")%> <%- include("partials/nav")%>
+<div class="w-[80%] mx-auto bg-slate-700 p-10 mt-4 rounded">
+  <form class="w-full text-center" action="/user/forget" method="post">
+    <h1 class="mb-10 text-white text-5xl font-bold">
+       Forget Password Page
+    </h1>
+    <input
+      class="w-1/2 rounded px-4 py-2 outline-none"
+      type="email"
+      name="email"
+      placeholder="xyz@gmail.com"
+    />
+    <br /><br />
+    <button class="text-white px-6 py-2 w-1/2 rounded bg-blue-600">Send</button>
+    <br />
+    <p class="mt-4 text-white">
+      <a class="text-blue-300" href="/login">Back to Login</a>
+    </p>
+  </form>
+</div>
+<%- include("partials/footer")%>
