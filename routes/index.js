@@ -22,5 +22,11 @@ router.get('/forget', function(req, res, next) {
     ,user:req.user
   });
 });
+router.get('/verify-otp/:id', function(req, res, next) {
+  res.render('forgetOtp', { title: 'Verify OTP / Social Media' 
+    ,user:req.user,
+    id:req.params.id
+  });
+});
 
 module.exports = router;

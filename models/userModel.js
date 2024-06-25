@@ -8,6 +8,10 @@ const UserSchema= new mongoose.Schema({
     avatar:{
         type:String,
         default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_yrd8qyMAeTKfxPH00Az2BqE561qnoB5Ulw&s"
+    },
+    otp:{
+        type:Number,
+        default:0
     }
 },{timestamps:true})
 
