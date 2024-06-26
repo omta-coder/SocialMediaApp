@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
 
+//file uploader
+const fileUpload = require("express-fileupload")
+
 mongoose.connect(process.env.MONGODB_URL).then(()=>{
   console.log("connected to database")
 }).catch((err)=>{
@@ -30,6 +33,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 },
+}));
 
 app.use(
   session({

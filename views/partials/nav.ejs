@@ -13,7 +13,9 @@
 
   <div>
     <% if(user) { %>
-    <a class="text-lg bg-red-500 text-white px-5 py-2 rounded" href="/user/logout">Logout</a>
+    <a class="text-lg bg-red-500 text-white rounded" href="/user/setting">
+      <img class="rounded-full w-[50px] h-[50px]" src="<%= user.avatar%>" alt="">
+    </a>
 
     <% }else { %>
     <a class="text-lg text-white bg-blue-500 hover:bg-blue-600 duration-300 px-5 py-2 rounded" href="/login">Login</a>
