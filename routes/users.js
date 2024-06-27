@@ -78,12 +78,27 @@ router.get("/setting",isLoggedIn,(req,res,next)=>{
 })
 router.post("/avatar/:id",isLoggedIn,async(req,res,next)=>{
   try {
-    const result = await imagekit.upload({
+    const {fileId,url,thumbnailUrl} = await imagekit.upload({
       file: req.files.avatar.data,
-      fileName: Date.now() + path.extname(req.files.avatar.name),
+      fileName: req.files.avatar.name,
     })
-    console.log(result);
+    if(req.user.avatar.fileId){
+      await imagekit.deleteFile(req.user.avatar.fileId)
+    }
+    req.user.avatar = {fileId,url,thumbnailUrl}
+    await req.user.save();
+
     res.redirect("/user/setting");
+  } catch (error) {
+    console.log(error);
+    res.send(error.message)
+  }
+})
+router.get("/delete/:id",isLoggedIn,async(req,res,next)=>{
+  try {
+    const user = await UserCollection.findByIdAndDelete(req.params.id);
+    await imagekit.deleteFile(user.avatar.fileId)
+    res.redirect("/login");
   } catch (error) {
     console.log(error);
     res.send(error.message)
@@ -91,3 +106,4 @@ router.post("/avatar/:id",isLoggedIn,async(req,res,next)=>{
 })
 
 module.exports = router;
+

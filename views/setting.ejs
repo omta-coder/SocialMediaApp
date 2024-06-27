@@ -2,21 +2,26 @@
 <%- include("partials/nav")%>
 <div class="w-[80%] mx-auto bg-slate-700  p-10 mt-4 rounded">
   <div class="mb-3 w-32 mx-auto">
-    <img class="avatarimage self-center rounded-full h-24 w-24 object-cover" src="<%= user.avatar%>" alt="">
+    <img class="avatarimage self-center rounded-full h-[8vmax] w-[8vmax] object-cover" src="<%= user.avatar.thumbnailUrl%>" alt="Not Found">
     <form class="hidden avatarform" action="/user/avatar/<%= user._id%>" method="post" enctype="multipart/form-data">
       <input class="avatarinput" type="file" name="avatar">
     </form>
     
   </div>
     <form class="w-full text-center" action="/user/setting" method="post">
-      <h1 class=" mb-10 text-white text-5xl font-bold">User Profile Details</h1>
+      <h1 class=" mb-6 text-white text-4xl font-bold">User Profile Details</h1>
     <input class="w-1/2 rounded px-4 py-2 outline-none" type="text" name="username" placeholder="Enter Your Name" value="<%= user.username%>">
     <br><br>
     <input class="w-1/2 rounded px-4 py-2 outline-none" type="email" name="email" placeholder="xyz@gmail.com" value="<%= user.email%>">
     <br><br>
-    <button class="text-white px-6 py-2 w-1/2 rounded bg-blue-600">Update User Profile</button>
+    <button class="text-white px-6 py-2 w-1/2 rounded bg-blue-600 hover:bg-blue-700 duration-300">Update User Profile</button>
     <br>
   </form>
+  <div class="w-1/2 flex justify-between mx-auto mt-5 ">
+    <a class="px-11 py-2 bg-red-400 hover:bg-red-600 duration-300 text-white rounded" href="/user/logout/<%= user._id%>">Logout</a>
+    <a class="px-11 py-2 bg-blue-600 hover:bg-blue-700 duration-300 text-white rounded" href="/user/reset-password">Reset Password</a>
+    <a class="px-11 py-2 bg-red-400 hover:bg-red-600 duration-300 text-white rounded" href="/user/delete/<%= user._id%>">Delete</a>
+  </div>
 </div>
 
 <script>

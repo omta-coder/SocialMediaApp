@@ -6,8 +6,9 @@ const UserSchema= new mongoose.Schema({
     email:String,
     password:String,
     avatar:{
-        type:String,
-        default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_yrd8qyMAeTKfxPH00Az2BqE561qnoB5Ulw&s"
+        fileId: String,
+        url: String,
+        thumbnailUrl: String,
     },
     otp:{
         type:Number,

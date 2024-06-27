@@ -14,7 +14,7 @@
   <div>
     <% if(user) { %>
     <a class="text-lg bg-red-500 text-white rounded" href="/user/setting">
-      <img class="rounded-full w-[50px] h-[50px]" src="<%= user.avatar%>" alt="">
+      <img class="rounded-full w-[50px] h-[50px]" src="<%= user.avatar.thumbnailUrl%>" alt="">
     </a>
 
     <% }else { %>

@@ -2,7 +2,13 @@
 <%- include("partials/nav")%>
 <div class="w-[80%] mx-auto bg-slate-700 text-white p-10 mt-4 rounded">
   <h1 class=" mb-10 text-white text-5xl font-bold">Hello <%= user.username%> 👋🏼</h1>
-  <img class="mb-10 " src="<%= user.avatar%>" alt="">
+  <div class="flex">
+    <img class="mb-10 w-[8vmax] h-[8vmax] " src="<%= user.avatar.thumbnailUrl%>" alt="">
+    <div class="ml-5">
+      <h1 class="text-5xl"><%= user.username%> </h1>
+      <h2 class="text-lg mt-2"><%= user.email%> </h2>
+    </div>
+  </div>
   <a class=" bg-red-500 hover:bg-red-600 duration-300 px-5 py-2 text-white rounded" href="/user/logout">Logout</a>
 </div>
 <%- include("partials/footer")%>
