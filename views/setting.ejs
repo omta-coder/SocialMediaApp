@@ -8,7 +8,7 @@
     </form>
     
   </div>
-    <form class="w-full text-center" action="/user/setting" method="post">
+    <form class="w-full text-center" action="/user/update/<%= user._id%>" method="post">
       <h1 class=" mb-6 text-white text-4xl font-bold">User Profile Details</h1>
     <input class="w-1/2 rounded px-4 py-2 outline-none" type="text" name="username" placeholder="Enter Your Name" value="<%= user.username%>">
     <br><br>
@@ -18,8 +18,8 @@
     <br>
   </form>
   <div class="w-1/2 flex justify-between mx-auto mt-5 ">
-    <a class="px-11 py-2 bg-red-400 hover:bg-red-600 duration-300 text-white rounded" href="/user/logout/<%= user._id%>">Logout</a>
-    <a class="px-11 py-2 bg-blue-600 hover:bg-blue-700 duration-300 text-white rounded" href="/user/reset-password">Reset Password</a>
+    <a class="px-11 py-2 bg-red-400 hover:bg-red-600 duration-300 text-white rounded" href="/user/logout">Logout</a>
+    <a class="px-11 py-2 bg-blue-600 hover:bg-blue-700 duration-300 text-white rounded" href="/user/reset-password/<%= user._id%>">Reset Password</a>
     <a class="px-11 py-2 bg-red-400 hover:bg-red-600 duration-300 text-white rounded" href="/user/delete/<%= user._id%>">Delete</a>
   </div>
 </div>
