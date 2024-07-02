@@ -107,7 +107,7 @@ router.get("/delete/:id",isLoggedIn,async(req,res,next)=>{
 router.post("/update/:id", isLoggedIn, async (req, res, next) => {
   try {
       await UserCollection.findByIdAndUpdate(req.params.id, req.body);
-      res.redirect("/user/setting");
+      res.redirect("/user/profile");
   } catch (error) {
       console.log(error);
       res.send(error.message);
