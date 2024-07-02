@@ -17,6 +17,7 @@ mongoose.connect(process.env.MONGODB_URL).then(()=>{
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var postRouter = require('./routes/post');
 
 var app = express();
 
@@ -52,6 +53,7 @@ passport.deserializeUser(UserCollection.deserializeUser());
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+app.use('/post', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

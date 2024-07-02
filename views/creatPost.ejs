@@ -1,0 +1,14 @@
+<%- include("partials/header")%>
+<%- include("partials/nav")%>
+<div class="w-[80%] mx-auto bg-slate-700 text-white p-10 mt-4 rounded">
+    <form class="w-full text-center" action="/create" method="post">
+      <h1 class=" mb-10 text-white text-5xl font-bold">Create Post</h1>
+    <input class="w-1/2 rounded px-4 py-2 outline-none" type="file" name="media" >
+    <br><br>
+    <input class="w-1/2 rounded px-4 py-2 outline-none" type="text" name="title" placeholder="Title">
+    <br><br>
+    <button class="text-white px-6 py-2 w-1/2 rounded bg-blue-600 hover:bg-blue-700 duration-300">Create Post</button>
+  </form>
+</div>
+
+<%- include("partials/footer")%>
