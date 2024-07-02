@@ -13,10 +13,14 @@ const UserSchema= new mongoose.Schema({
     otp:{
         type:Number,
         default:0
-    }
+    },
+    posts:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"post"
+    }]
 },{timestamps:true})
 
 UserSchema.plugin(plm);
 
-const UserCollection = mongoose.model("User",UserSchema);
+const UserCollection = mongoose.model("user",UserSchema);
 module.exports = UserCollection;  //exporting the model so that it can be used in other
