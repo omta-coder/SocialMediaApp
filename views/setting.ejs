@@ -23,6 +23,15 @@
     <a class="px-11 py-2 bg-red-400 hover:bg-red-600 duration-300 text-white rounded" href="/user/delete/<%= user._id%>">Delete</a>
   </div>
 </div>
+<div class="w-[80%] mx-auto mt-5">
+  <h1 class="text-4xl font-bold mb-4">Posts</h1>
+  <div class="w-[14vmax] flex flex-col items-center bg-blue-500">
+    <%user.posts.forEach((post)=>{%>
+      <img class="w-[10vmax]" src="<%= post.media.thumbnailUrl%>" alt="">
+      <h1 class="text-center"><%= post.title%></h1>
+    <%})%>
+  </div>
+</div>
 
 <script>
   const avatarimage = document.querySelector('.avatarimage');

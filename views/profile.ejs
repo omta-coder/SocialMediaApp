@@ -1,6 +1,7 @@
 <%- include("partials/header")%>
 <%- include("partials/nav")%>
-<div class="w-[80%] mx-auto bg-slate-700 text-white p-10 mt-4 rounded">
+<div class="w-[80%] mx-auto  p-10 mt-4 ">
+  <div class="w-full p-10 bg-slate-700 text-white rounded">
   <h1 class=" mb-10 text-white text-5xl font-bold">Hello <%= user.username%> 👋🏼</h1>
   <div class="flex">
     <img class="mb-10 w-[8vmax] h-[8vmax] " src="<%= user.avatar.thumbnailUrl%>" alt="">
@@ -11,5 +12,16 @@
   </div>
   <a class=" bg-red-500 hover:bg-red-600 duration-300 px-5 py-2 text-white rounded" href="/user/logout">Logout</a>
   <a class=" bg-blue-500 hover:bg-blue-600 duration-300 px-5 py-2 text-white rounded" href="/post/create">Create Post</a>
+</div>
+<hr>
+<div class="w-full mt-10">
+  <h1 class="text-4xl font-bold mb-4">Posts</h1>
+  <div class="w-[14vmax] flex flex-col items-center bg-blue-500">
+    <%posts.forEach((post)=>{%>
+      <img class="w-[10vmax]" src="<%= post.media.thumbnailUrl%>" alt="">
+      <h1 class="text-center"><%= post.title%></h1>
+    <%})%>
+  </div>
+</div>
 </div>
 <%- include("partials/footer")%>

@@ -8,6 +8,7 @@ const LocalStategy = require("passport-local");
 const { isLoggedIn } = require('../middleware/auth');
 const { sendMail } = require('../utils/sendmail');
 const imagekit = require('../utils/imagekit');
+const PostCollaction = require('../models/postModel');
 
 
 passport.use(new LocalStategy(UserCollection.authenticate()));
@@ -32,8 +33,14 @@ router.post('/login',passport.authenticate("local",{
 (req,res)=>{}
 )
 
-router.get('/profile',isLoggedIn, function(req, res, next) {
-  res.render('profile', { title: 'Login Page / Social Media',user:req.user});
+router.get('/profile',isLoggedIn, async function(req, res, next) {
+try {
+  const posts = await PostCollaction.find().populate("user");
+    res.render('profile', { title: 'Login Page / Social Media',user:req.user,posts:posts});
+} catch (error) {
+  console.log(error);
+    res.send(error.message);
+}
 });
 router.get('/logout',isLoggedIn, function(req, res, next) {
   req.logout(()=>{
@@ -73,8 +80,14 @@ router.post("/verify-otp/:id",async(req,res,next)=>{
     res.send(error.message)
   }
 });
-router.get("/setting",isLoggedIn,(req,res,next)=>{
-  res.render("setting",{title: "Setting Page || SocialMedia",user:req.user})
+router.get("/setting",isLoggedIn,async(req,res,next)=>{
+  try {
+    const userAndPosts = await req.user.populate("posts")
+    res.render("setting",{title: "Setting Page || SocialMedia",user:req.user,user:userAndPosts})
+  } catch (error) {
+    console.log(error);
+    res.send(error.message)
+  }
 })
 router.post("/avatar/:id",isLoggedIn,async(req,res,next)=>{
   try {
@@ -97,7 +110,11 @@ router.post("/avatar/:id",isLoggedIn,async(req,res,next)=>{
 router.get("/delete/:id",isLoggedIn,async(req,res,next)=>{
   try {
     const user = await UserCollection.findByIdAndDelete(req.params.id);
-    await imagekit.deleteFile(user.avatar.fileId)
+    await imagekit.deleteFile(user.avatar.fileId);
+    await user.posts.forEach(async(post)=>{
+      const deletedPost = await PostCollaction.findByIdAndDelete(post)
+      await imagekit.deleteFile(deletedPost.media.fileId)
+    })
     res.redirect("/login");
   } catch (error) {
     console.log(error);

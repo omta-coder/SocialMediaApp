@@ -1,9 +1,16 @@
 var express = require('express');
+const PostCollaction = require('../models/postModel');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Home Page/ Social Media' ,user:req.user});
+router.get('/',async function(req, res, next) {
+  try {
+    const posts = await PostCollaction.find().populate("user")
+    res.render('index', { title: 'Home Page/ Social Media' ,user:req.user,posts:posts});
+  } catch (error) {
+    console.log(error);
+    res.send(error.message)
+  }
 });
 router.get('/about', function(req, res, next) {
   res.render('about', { title: 'About Page / Social Medial',user:req.user });
