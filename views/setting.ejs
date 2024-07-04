@@ -25,12 +25,14 @@
 </div>
 <div class="w-[80%] mx-auto mt-5">
   <h1 class="text-4xl font-extrabold mb-4">Posts</h1>
-  <%user.posts.forEach((post)=>{%>
-    <div >
-      <h1 class="text-2xl font-bold mb-2"><%= post.title%></h1>
-      <img class="w-[10vmax]" src="<%= post.media.thumbnailUrl%>" alt="">
+  <div class="flex flex-wrap gap-6">
+    <%user.posts.forEach((post)=>{%>
+      <div >
+        <h1 class="text-2xl font-bold mb-2"><%= post.title%></h1>
+        <img class="w-[10vmax]" src="<%= post.media.thumbnailUrl%>" alt="">
+      </div>
+      <%})%>
     </div>
-    <%})%>
 </div>
 
 <script>

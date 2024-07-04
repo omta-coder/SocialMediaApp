@@ -8,13 +8,14 @@
 <hr>
 <div class="w-full mt-10">
   <h1 class="text-4xl font-extrabold mb-4">Posts</h1>
- 
+  <div class="flex flex-wrap gap-6">
     <%posts.forEach((post)=>{%>
       <div>
-      <h1 class="text-2xl font-bold mb-2"><%= post.title%></h1>
-      <img class="w-[10vmax]" src="<%= post.media.thumbnailUrl%>" alt="">
+        <h1 class="text-2xl font-bold mb-2"><%= post.title%></h1>
+        <img class="w-[10vmax]" src="<%= post.media.thumbnailUrl%>" alt="">
+      </div>
+      <%})%>
     </div>
-    <%})%>
   
 </div>
 </div>
