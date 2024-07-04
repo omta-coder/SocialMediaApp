@@ -15,13 +15,19 @@
 </div>
 <hr>
 <div class="w-full mt-10">
-  <h1 class="text-4xl font-bold mb-4">Posts</h1>
-  <div class="w-[14vmax] flex flex-col items-center bg-blue-500">
+  <h1 class="text-4xl font-extrabold mb-4">Posts</h1>
+ 
     <%posts.forEach((post)=>{%>
+      <div>
+      <h1 class="text-2xl font-bold mb-2"><%= post.title%></h1>
       <img class="w-[10vmax]" src="<%= post.media.thumbnailUrl%>" alt="">
-      <h1 class="text-center"><%= post.title%></h1>
+      <a href="/post/like/<%= post._id%>">
+        <%= post.likes.includes(user._id)? "💗":"🤍"%>
+      </a>
+      <span><%= post.likes.length%></span>
+    </div>
     <%})%>
-  </div>
+  
 </div>
 </div>
 <%- include("partials/footer")%>
