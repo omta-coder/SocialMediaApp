@@ -43,5 +43,10 @@ router.get("/delete/:id", isLoggedIn, deleteUser);
 router.post("/update/:id", isLoggedIn, updateUser);
 router.get("/reset-password/:id", isLoggedIn, resetPasswordPage);
 router.post("/reset-password/:id", isLoggedIn, resetPassword);
+router.get("/chat",isLoggedIn,(req,res,next)=>{
+ res.render("chat",{title:"Chat Page || Social Media",
+  user:req.user,
+ })
+})
 
 module.exports = router;
