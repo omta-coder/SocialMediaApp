@@ -43,9 +43,11 @@ router.get("/delete/:id", isLoggedIn, deleteUser);
 router.post("/update/:id", isLoggedIn, updateUser);
 router.get("/reset-password/:id", isLoggedIn, resetPasswordPage);
 router.post("/reset-password/:id", isLoggedIn, resetPassword);
-router.get("/chat",isLoggedIn,(req,res,next)=>{
+router.get("/chat",isLoggedIn,async(req,res,next)=>{
+  const users = await UserCollection.find({_id : {$ne:req.user._id}})
  res.render("chat",{title:"Chat Page || Social Media",
   user:req.user,
+  users,
  })
 })
 
