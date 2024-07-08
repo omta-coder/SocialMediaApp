@@ -17,7 +17,8 @@ const UserSchema= new mongoose.Schema({
     posts:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"post"
-    }]
+    }],
+    socketId: String,
 },{timestamps:true})
 
 UserSchema.plugin(plm);

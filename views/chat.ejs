@@ -1,47 +1,72 @@
 <%- include("partials/header")%> <%- include("partials/nav")%>
 <div class="w-full mx-auto gap-3 p-10 mt-4 flex h-full">
   <div class="left">
-    <div class="users flex flex-col gap-3">
+    <div class="users w-full flex flex-col gap-3">
       <% users.forEach(singleUser=>{%>
       <div
-      onclick="openChat('<%= singleUser.avatar.url %>','<%= singleUser.username %>')"
-        class="cursor-pointer user flex gap-3 items-center justify-center p-2 px-3 rounded bg-slate-200 w-fit"
+        onclick="openChat('<%= singleUser.avatar.url %>','<%= singleUser.username %>')"
+        class="cursor-pointer user flex gap-3 items-center justify-between p-2 rounded bg-slate-200"
       >
-        <img class="h-[4rem] w-[4rem] rounded-full" src="<%= singleUser.avatar.url%>" alt="" />
+        <img
+          class="h-[4rem] w-[4rem] rounded-full"
+          src="<%= singleUser.avatar.url%>"
+          alt=""
+        />
         <h1><%= singleUser.username%></h1>
       </div>
       <%})%>
     </div>
   </div>
-  <div class="right w-full bg-slate-300 h-screen p-2 relative">
+  <div class="right w-full bg-slate-300 rounded h-screen p-2 relative">
     <div class="top">
-        <div class="user absolute top-0">
-            <div class="cursor-pointer user flex gap-3 items-center p-2 rounded  w-fit">
-                <img class="h-[4rem] w-[4rem] rounded-full"  src="https://images.unsplash.com/photo-1484589065579-248aad0d8b13?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWJzdHJhY3R8ZW58MHx8MHx8fDA%3D" alt="">
-                <h1>username</h1>
-            </div>
+      <div class="user absolute top-0">
+        <div
+          class="cursor-pointer user flex gap-3 items-center p-2 rounded w-fit"
+        >
+          <img
+            class="h-[4rem] w-[4rem] rounded-full"
+            src="https://images.unsplash.com/photo-1484589065579-248aad0d8b13?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWJzdHJhY3R8ZW58MHx8MHx8fDA%3D"
+            alt=""
+          />
+          <h1>username</h1>
         </div>
-        <div class="bottom h-full">
-            <div class="converationArea h-full">
-            </div>
-            <div class="inputField absolute bottom-0 p-3 w-full flex items-center justify-center gap-3">
-                <input type="text" class="p-3 w-[75%] outline-none" style="border-radius: 0.7rem;" placeholder="Enter message">
-                <button class="p-3 bg-slate-200 rounded-full" style="border-radius: 50%"><i class="ri-send-plane-line"></i></button>
-              </div>
+      </div>
+      <div class="bottom h-full">
+        <div class="converationArea h-full"></div>
+        <div
+          class="inputField absolute bottom-0 p-3 w-full flex items-center justify-center gap-3"
+        >
+          <input
+            type="text"
+            class="p-3 w-[75%] outline-none"
+            style="border-radius: 0.7rem"
+            placeholder="Enter message"
+          />
+          <button
+            class="p-3 bg-slate-200 rounded-full"
+            style="border-radius: 50%"
+          >
+            <i class="ri-send-plane-line"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io();
-</script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    const loggedInUserame = "<%= user.username%>"
+    socket.emit('join',loggedInUserame)
 
-<script>
-    function openChat(userImage,userame){
-        document.querySelector(".right .top .user img").src=userImage;
-        document.querySelector(".right .top .user h1").innerText=userame;
+  </script>
+
+  <script>
+    function openChat(userImage, userame) {
+      document.querySelector(".right .top .user img").src = userImage;
+      document.querySelector(".right .top .user h1").innerText = userame;
     }
-</script>
+  </script>
 
-<%- include("partials/footer")%>
+  <%- include("partials/footer")%>
+</div>
