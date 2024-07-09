@@ -14,6 +14,13 @@ io.on( "connection", function( socket ) {
             socketId : socket.id
         })
     })
+    socket.on('sony',async (messageObject)=>{
+        const reciever = await UserCollection.findOne({
+            username : messageObject.reciever
+        })
+        const socketId = reciever.socketId;
+        socket.to(socketId).emit('max',messageObject)
+    })
 });
 // end of socket.io logic
 
