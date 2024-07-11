@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const messageSchema = mongoose.Schema({
-
     sender: {
         type: String,
         required: true
