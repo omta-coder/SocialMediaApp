@@ -1,108 +1,110 @@
-<%- include("partials/header")%>
+<%- include('partials/header')%>
+<!--  -->
+<%- include('partials/nav')%>
+<!--  -->
+<div class="w-full mx-auto p-10 flex h-full gap-3">
 
-<%- include("partials/nav")%>
-
-<div class="w-full mx-auto gap-3 p-10 mt-4 flex h-full">
   <div class="left min-w-80">
-    <div class="users w-full flex flex-col gap-3">
-      <% users.forEach(singleUser=>{%>
-      <div
-        onclick="openChat('<%= singleUser.avatar.url %>','<%= singleUser.username %>')"
-        class="cursor-pointer user flex gap-3 items-center  p-2 rounded bg-slate-200"
-      >
-        <img
-          class="h-[4rem] w-[4rem] rounded-full"
-          src="<%= singleUser.avatar.url%>"
-          alt=""
-        />
-        <h1><%= singleUser.username%></h1>
+    <div class="users flex flex-col gap-3">
+      <% users.forEach(singleUser=>{ %>
+      <div onclick="openChat('<%= singleUser.avatar.url %>','<%= singleUser.username %>')" style="border-radius: 0.5rem;" class="cursor-pointer w-full user flex gap-3 items-center p-2 rounded-2 bg-slate-200 w-fit">
+        <img class="h-[4rem] w-[4rem] " style="border-radius: 50%;" src="<%= singleUser.avatar.url %>" alt="">
+        <h1><%= singleUser.username %></h1>
       </div>
-      <%})%>
+      <% }) %>
+
     </div>
   </div>
-  <div class="right w-full bg-slate-300 rounded h-screen p-2 relative">
-    <div class="top">
-      <div class="user absolute top-0">
-        <div
-          class="cursor-pointer user flex gap-3 items-center p-2 rounded w-fit"
-        >
-          <img
-            class="h-[4rem] w-[4rem] rounded-full"
-            src="https://images.unsplash.com/photo-1484589065579-248aad0d8b13?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWJzdHJhY3R8ZW58MHx8MHx8fDA%3D"
-            alt=""
-          />
-          <h1>username</h1>
-        </div>
+  <div class="right w-full bg-slate-300 h-screen p-2 relative">
+    <div class="top absolute top-0">
+      <div style="border-radius: 0.5rem;" class="cursor-pointer user flex gap-3 items-center p-2 rounded-2  w-fit">
+        <img class="h-[4rem] w-[4rem] " style="border-radius: 50%;" src="https://images.unsplash.com/photo-1484589065579-248aad0d8b13?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWJzdHJhY3R8ZW58MHx8MHx8fDA%3D" alt="">
+        <h1>username</h1>
       </div>
-      <div class="bottom h-full">
-        <div class="converationArea h-full pt-[5rem] px-3">
-        </div>
-        <div
-          class="inputField absolute bottom-0 p-3 w-full flex items-center justify-center gap-3"
-        >
-          <input
-            type="text"
-            class="p-3 w-[75%] outline-none"
-            style="border-radius: 0.7rem"
-            placeholder="Enter message"
-          />
-          <button
-          id="sendMessage"
-            class="p-3 bg-slate-200 rounded-full"
-            style="border-radius: 50%"
-          >
-            <i class="ri-send-plane-line"></i>
-          </button>
-        </div>
+    </div>
+    <div class="bottom h-full">
+      <div class="converationArea h-full pt-[5rem]">
+      </div>
+
+      <div class="inputField absolute bottom-0 p-3 w-full flex items-center justify-center gap-3">
+        <input type="text" class="p-3 w-[75%]" style="border-radius: 0.7rem;" placeholder="Enter message">
+        <button id="sendMessage" class="p-3 bg-slate-200 rounded-full" style="border-radius: 50%;
+        "><i class="ri-send-plane-line"></i></button>
       </div>
     </div>
   </div>
+</div>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io();
-    const loggedInUserame = "<%= user.username%>"
-    let reciever = null
-    socket.emit('join',loggedInUserame)
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+  const loggedInUsername = "<%= user.username %>"
+  let receiver = null
 
-  </script>
+  socket.emit('join', loggedInUsername)
+</script>
 
-  <script>
-    function openChat(userImage, userame) {
-      reciever = userame
-      document.querySelector(".right .top .user img").src = userImage;
-      document.querySelector(".right .top .user h1").innerText = userame;
-    }
+<script>
+  function openChat(userImage, username) {
+    receiver = username
+    document.querySelector('.right .top .user img').src = userImage
+    document.querySelector('.right .top .user h1').innerText = username
 
-    function appendOutgoingMessage(message){
-      const template = `<div class="message ml-auto bg-slate-400 w-fit p-2 rounded-sm">
-              <p>${message}</p>
-            </div>`;
-            document.querySelector('.converationArea').innerHTML += template
-
-            socket.emit('sony',{
-              message,
-              reciever,
-              sender:loggedInUserame
-            })
-    }
-    function appendInComingMessage(message){
-      const template = `<div class="message bg-slate-400 w-fit p-2 rounded-sm">
-              <p>${message}</p>
-            </div>`;
-            document.querySelector('.converationArea').innerHTML += template
-          }
-          socket.on('max',(messageObject)=>{
-            appendInComingMessage(messageObject.message)
-          })
-
-    document.querySelector('#sendMessage').addEventListener("click",()=>{
-      const message = document.querySelector('.inputField input').value
-      appendOutgoingMessage(message);
-     
+    socket.emit('openChat', {
+      receiver,
+      sender: loggedInUsername
     })
 
-  </script>
+  }
 
-  <%- include("partials/footer")%>
-</div>
+  socket.on("openChat", messages => {
+    messages.forEach(messageObject => {
+
+      if (messageObject.sender === loggedInUsername) {
+        appendOutgoingMessage(messageObject.text)
+      } else {
+        appendIncomingMessage(messageObject.text)
+      }
+
+    })
+  })
+
+  function appendOutgoingMessage(message) {
+    const template = `
+    <div class="message ml-auto bg-slate-400 w-fit p-2 rounded-sm">
+          <p>${message}</p>
+        </div>`
+    document.querySelector('.converationArea').innerHTML += template
+  }
+
+  function appendIncomingMessage(message) {
+    const template = ` <div class="message bg-slate-400 w-fit p-2 rounded-sm">
+          <p>${message}</p>
+        </div>`
+
+    document.querySelector('.converationArea').innerHTML += template
+  }
+
+  socket.on('max', messageObject => {
+    appendIncomingMessage(messageObject.message)
+  })
+
+
+  document.querySelector('#sendMessage').addEventListener('click', () => {
+
+    const message = document.querySelector('.inputField input').value
+
+    appendOutgoingMessage(message)
+
+    socket.emit('sony', {
+      message,
+      receiver,
+      sender: loggedInUsername
+    })
+
+  })
+</script>
+
+
+<!--  -->
+<%- include('partials/footer')%>
