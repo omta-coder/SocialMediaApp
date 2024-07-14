@@ -11,12 +11,12 @@ const postSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"user"
     },
-    likes:{
-        type:[{
+    likes:
+        [{
             type:mongoose.Schema.Types.ObjectId,
             ref:"user"
         }]
-    }
+    
 },{timestamps:true});
 const PostCollaction = mongoose.model("post", postSchema);
 module.exports = PostCollaction;
