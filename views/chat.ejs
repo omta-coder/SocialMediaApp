@@ -4,17 +4,18 @@
 <!--  -->
 <div class="w-full mx-auto p-10 flex h-full gap-3">
 
-  <div class="left min-w-80">
+  <div class="left w-80">
     <div class="users flex flex-col gap-3">
       <% users.forEach(singleUser=>{ %>
       <div onclick="openChat('<%= singleUser.avatar.url %>','<%= singleUser.username %>')" style="border-radius: 0.5rem;" class="cursor-pointer w-full user flex gap-3 items-center p-2 rounded-2 bg-slate-200 w-fit">
-        <img class="h-[4rem] w-[4rem] " style="border-radius: 50%;" src="<%= singleUser.avatar.url %>" alt="">
+        <img class="h-[4rem] w-[4rem] " style="border-radius: 50%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSteItzPyeDKBxyWiOA8xrPZXIlxOYv1b1VVg&s" alt="">
         <h1><%= singleUser.username %></h1>
       </div>
       <% }) %>
 
     </div>
   </div>
+  
   <div class="right w-full bg-slate-300 h-screen p-2 relative">
     <div class="top absolute top-0">
       <div style="border-radius: 0.5rem;" class="cursor-pointer user flex gap-3 items-center p-2 rounded-2  w-fit">

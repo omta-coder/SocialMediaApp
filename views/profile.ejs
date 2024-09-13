@@ -4,31 +4,13 @@
   <div class="w-full p-10 bg-slate-700 text-white rounded">
   <h1 class=" mb-10 text-white text-5xl font-bold">Hello <%= user.username%> 👋🏼</h1>
   <div class="flex">
-    <img class="mb-10 w-[8vmax] h-[8vmax] " src="<%= user.avatar.thumbnailUrl%>" alt="">
+    <img class="mb-10 w-[8vmax] h-[8vmax] " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSteItzPyeDKBxyWiOA8xrPZXIlxOYv1b1VVg&s" alt="">
     <div class="ml-5">
       <h1 class="text-5xl"><%= user.username%> </h1>
       <h2 class="text-lg mt-2"><%= user.email%> </h2>
     </div>
   </div>
   <a class=" bg-red-500 hover:bg-red-600 duration-300 px-5 py-2 text-white rounded" href="/user/logout">Logout</a>
-  <a class=" bg-blue-500 hover:bg-blue-600 duration-300 px-5 py-2 text-white rounded" href="/post/create">Create Post</a>
-</div>
-<hr>
-<div class="w-full mt-10">
-  <h1 class="text-4xl font-extrabold mb-4">Posts</h1>
- <div class="flex flex-wrap gap-6">
-    <%posts.forEach((post)=>{%>
-      <div>
-      <h1 class="text-2xl font-bold mb-2"><%= post.title%></h1>
-      <img class="w-[10vmax]" src="<%= post.media.thumbnailUrl%>" alt="">
-      <a href="/post/like/<%= post._id%>">
-        <%= post.likes.includes(user._id)? "💗":"🤍"%>
-      </a>
-      <span><%= post.likes.length%></span>
-    </div>
-    <%})%>
-  </div>
-  
 </div>
 </div>
 <%- include("partials/footer")%>
